@@ -1,5 +1,12 @@
 words = process.env.HUBOT_WORDS or '{}'
-wordsJson = JSON.parse words
+wordsJson = {}
+try
+    wordsJson = JSON.parse words	
+catch e
+	console.log 'words : ' + words
+	console.log e
+	wordsJson = {}
+	
 matchWords = Object.keys wordsJson
 regStr = matchWords.join('|')
 reg = new RegExp(regStr, 'i')
